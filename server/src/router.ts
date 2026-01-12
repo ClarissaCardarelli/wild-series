@@ -9,33 +9,13 @@ const router = express.Router();
 import categoryActions from "./modules/category/categoryActions";
 
 router.get("/api/categories", categoryActions.browse);
-router.get("/api/categories/:id", categoryActions.read);
+router.get("/api/categories/:id", categoryActions.readById);
 
 /* ************************************************************************* */
 
-// Define program-related routes
-import programActions from "./modules/program/programActions";
+import serieActions from "./modules/serie/serieActions";
 
-router.get("/api/programs", programActions.browse);
-router.get("/api/programs/:id", programActions.read);
-
-/* ************************************************************************* */
-
-// Define item-related routes
-import itemActions from "./modules/item/itemActions";
-
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
-
-/* ************************************************************************* */
-
-// Declaration of a "Welcome" route
-
-import sayActions from "./modules/say/sayActions";
-
-router.get("/", sayActions.sayWelcome);
-
-/* ************************************************************************* */
+router.get("/api/series", serieActions.browseSeries);
+router.get("/api/series/:id", serieActions.readById);
 
 export default router;

@@ -10,51 +10,65 @@ body {
   line-height: 1.7;
   color: #eee;
   margin: 0;
-}
-
-#root {
   height: 100vh;
   background-image: url("./assets/images/background.webp");
   background-size: cover;
   background-position: top;
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  grid-template-rows: 1fr;
-  align-content: start;
-  padding: 1rem;
 }
 
-header {
-  grid-column: 1 / 2;
-  grid-row: 1;
+h1 {
+  text-align: center;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 .logo {
   font-size: larger;
+  display: inline;
 }
 
 .navbar {
-  grid-column: -2 / -1;
-  grid-row: 1;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4rem;
 }
 
 .navbar ul {
   display: flex;
-  justify-content: end;
   gap: 1rem;
   list-style: none;
 }
 
 .navbar a {
   text-decoration: none;
-  color: #eee;
   display: flex;
-  gap: 0.5rem;
+  padding: 1rem;
   align-items: center;
 }
 
 .navbar a:hover {
   scale: 110%;
+}
+
+.btnContainer {
+  margin: 20vh auto 0;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+
+.menuBtn {
+  background-color: #fff;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 5rem;
 }
 
 .text-box {
@@ -121,25 +135,4 @@ footer {
 
 .wcs:hover {
   text-decoration: underline;
-}
-
-@keyframes blink {
-  20%,
-  24%,
-  55% {
-    color: #111;
-    text-shadow: none;
-  }
-  0%,
-  19%,
-  21%,
-  23%,
-  25%,
-  54%,
-  56%,
-  100% {
-    text-shadow: 0 0 5px #ff1493ad, 0 0 15px #eee, 0 0 20px #ff1493ad, 0 0 40px
-      #a00ac9, 0 0 60px #ff0000, 0 0 10px #970dc5, 0 0 98px #ff0000;
-    color: #fff;
-  }
 }

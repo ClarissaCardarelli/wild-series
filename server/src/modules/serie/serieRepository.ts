@@ -2,7 +2,7 @@ import databaseClient from "../../../database/client";
 
 import type { Result, Rows } from "../../../database/client";
 
-type Program = {
+type Serie = {
   id: number;
   title: string;
   synopsis: string;
@@ -12,14 +12,22 @@ type Program = {
   category_id: number;
 };
 
-class ProgramRepository {
+class SerieRepository {
   async readAll() {
     // Execute the SQL SELECT query to retrieve all categories from the "category" table
-    const [rows] = await databaseClient.query<Rows>("select * from program");
+    const [rows] = await databaseClient.query<Rows>("select * from serie");
 
     // Return the array of categories
-    return rows as Program[];
+    return rows as Serie[];
+  }
+
+  async read(id: number) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from serie where id = ?",
+      [id],
+    );
+    return rows[0] as Serie;
   }
 }
 
-export default new ProgramRepository();
+export default new SerieRepository();

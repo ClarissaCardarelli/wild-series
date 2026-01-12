@@ -1,39 +1,44 @@
 // Import access to data
 import categoryRepository from "./categoryRepository";
 
-const categories = [
-  {
-    id: 1,
-    name: "Comédie",
-  },
-  {
-    id: 2,
-    name: "Science-Fiction",
-  },
-];
-
 // Declare the actions
 
 import type { RequestHandler } from "express";
 
-const browse: RequestHandler = async (req, res) => {
-  const categoriesFromDB = await categoryRepository.readAll();
+const browse: RequestHandler = async (req, res, next) => {
+  try {
+    // Fetch all categories
+    const categories = await categoryRepository.readAll();
 
-  res.json(categoriesFromDB);
-};
-
-const read: RequestHandler = (req, res) => {
-  const parsedId = Number.parseInt(req.params.id);
-
-  const category = categories.find((c) => c.id === parsedId);
-
-  if (category != null) {
-    res.json(category);
-  } else {
-    res.sendStatus(404);
+    // Respond with the categories in JSON format
+    res.json(categories);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
   }
 };
 
-// Export them to import them somewhere else
+const readById: RequestHandler = async (req, res, next) => {
+  try {
+    const id = Number(req.params.id);
 
-export default { browse, read };
+    if (Number.isNaN(id)) {
+      res.sendStatus(400); // bad request
+    }
+
+    const category = await categoryRepository.readCategory(id);
+
+    // If the category is not found, respond with HTTP 404 (Not Found)
+    // Otherwise, respond with the category in JSON format
+    if (category == null) {
+      res.sendStatus(404);
+    } else {
+      res.json(category);
+    }
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+export default { browse, readById };
